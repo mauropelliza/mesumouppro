@@ -1,0 +1,179 @@
+.ms-usercard {
+	line-height:40px;
+	background-color:rgb(66, 161, 244);
+	float:right;
+	border-radius: 5px;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+.ms-usercard .ms-username {
+	font-size: 18px;
+	color:white;
+	margin-right:10px;
+}
+.ms-usercard .ms-usericon {
+	font-size:20px;
+	color:white;
+}
+
+.ms-card-options {
+	padding-top:29px;
+}
+
+#ms-bienvenidaContainer {
+	padding-top:40px;
+}
+
+#ms-bienvenidaContainer h1 {
+	margin-top:0;
+}
+
+.fa {
+	margin-right:10px;
+}
+.ms-cuerpoPagina {
+	padding-top:30px;
+}
+
+.ms-ingreso {
+	padding:20px
+	
+}
+.ms-ingreso .ms-forminput {
+	margin-bottom:15px;
+}
+
+.ms-col-container {
+	display:flex;
+}
+
+.ms-bd-rg {
+	border-right: 1px solid #666666;
+}
+
+.ms-header {
+	height:100px;
+	background-color:rgb(66, 161, 244);
+}
+
+.ms-font-header {
+	font-family: 'Concert One', cursive;
+	font-size:25px;
+}
+
+.ms-banner-header {
+	border-radius:15px;
+	padding:10px;
+	background-color:white;
+}
+
+.ms-header-left {
+	padding-top:10px;
+}
+
+.ms-header-right{
+	padding-top:22px;
+}
+
+.ms-font-header .ms-red {
+	color:rgb(232, 55, 64);
+}
+
+.ms-font-header .ms-green {
+	color:green;
+}
+
+.ms-nombre-mesumo {
+	font-family: 'Concert One', cursive;
+	font-size:25px;
+	color:green;
+}
+.ms-pd-left {
+	padding-left:20px;
+}
+.ms-mg-top {
+	margin-top:20px;
+}
+.ms-roboto {
+	font-family:'Roboto', sans-serif;
+}
+
+.ms-cartel-entrada {
+	margin-top:50px;
+	
+}
+/* botones */
+.ms-animate
+{
+	transition: all 0.1s;
+	-webkit-transition: all 0.1s;
+}
+
+.ms-action-button
+{
+	position: relative;
+	padding: 10px 25px;
+  	margin: 0px 10px 10px 0px;
+  	float: left;
+	border-radius: 10px;
+	font-family: 'Arial';
+	font-size: 25px;
+	color: #FFF;
+	text-decoration: none;	
+}
+
+.ms-card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 80%;
+    border-radius: 5px;
+    padding: 2px 16px;
+    background-color: rgba(158, 194, 224, 0.37);
+    margin-top:20px;
+}
+
+.ms-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.blue
+{
+	background-color: #3498DB;
+	border-bottom: 5px solid #2980B9;
+	text-shadow: 0px -2px #2980B9;
+}
+
+.red
+{
+	background-color: #E74C3C;
+	border-bottom: 5px solid #BD3E31;
+	text-shadow: 0px -2px #BD3E31;
+}
+
+.green
+{
+	background-color: #82BF56;
+	border-bottom: 5px solid #669644;
+	text-shadow: 0px -2px #669644;
+}
+
+.yellow
+{
+	background-color: #F2CF66;
+	border-bottom: 5px solid #D1B358;
+	text-shadow: 0px -2px #D1B358;
+}
+
+.orange {
+	background-color: #ef9c02;
+  	border-bottom: 5px solid #b77701;
+  	text-shadow: 0px -2px #b77701;
+}
+
+.ms-action-button:active
+{
+	transform: translate(0px,5px);
+  -webkit-transform: translate(0px,5px);
+	border-bottom: 1px solid;
+}
