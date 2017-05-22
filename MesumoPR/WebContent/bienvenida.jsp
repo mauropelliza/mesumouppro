@@ -5,39 +5,14 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Bienvenido a me sumo</title>
-	<link rel=stylesheet href="css/bootstrap-theme.css" type="text/css">
-	<link rel=stylesheet href="css/bootstrap-theme.css.map" type="text/css">
-	<link rel=stylesheet href="css/bootstrap-theme.min.css" type="text/css">
-	<link rel=stylesheet href="css/bootstrap-theme.min.css.map" type="text/css">
-	<link rel=stylesheet href="css/bootstrap.css" type="text/css">
-	<link rel=stylesheet href="css/bootstrap.css.map" type="text/css">
-	<link rel=stylesheet href="css/bootstrap.min.css" type="text/css">
-	<link rel=stylesheet href="css/bootstrap.min.css.map" type="text/css">
-	<link rel=stylesheet href="css/misestilos.css" type="text/css">
-	<link rel=stylesheet href="css/font-awesome.min.css" type="text/css">
-	<link href="https://fonts.googleapis.com/css?family=Concert+One" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-	<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/bienvenida.js"></script>
+	<%@include file="rutas.jsp" %>
+	<script type="text/javascript" src="js/bienvenida.js"></script>	 
 </head>
 <body>
-<input type="hidden" id="rutaLista" value="<s:url action="CargarLista" method="cargarLista" />" />
-<input type="hidden" id="traerBusqueda" value="<s:url action="traerBusqueda" method="traerDetalle" />" />
-<input type="hidden" id="listarPorCategoria" value="<s:url action="ListarPorCategoria" method="cargarListaPorCategoria" />" />
-<%-- 	<s:property value="usernom"/> --%>
-	<div class="ms-header container-fluid">
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="pull-left ms-header-left">
-					<img alt="ME SUMO" class="ms-logo-header" src="img/mesumologo.png">
-				</div>
-				<div class="pull-right ms-header-right">
-					<div class="ms-font-header ms-banner-header">Conectamos <span class="ms-red">hospitales</span> con personas con ganas de <span class="ms-green">ayudar</span></div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<input type="hidden" id="rutaLista" value="<s:url action="CargarLista" method="cargarLista" />" />
+	<input type="hidden" id="traerBusqueda" value="<s:url action="traerBusqueda" method="traerDetalle" />" />
+	<input type="hidden" id="listarPorCategoria" value="<s:url action="ListarPorCategoria" method="cargarListaPorCategoria" />" />
+	<%@include file="header.jsp" %>
 	<div class="container-fluid" id="ms-bienvenidaContainer">
 		<div class="row">
 			<div class="col-xs-1">

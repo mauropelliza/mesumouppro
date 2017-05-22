@@ -1,0 +1,56 @@
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+   <constant name="struts.devMode" value="true" />
+   <constant name="struts.ui.theme" value="simple" />
+   <package name="MesumoPR" extends="struts-default,json-default">
+    
+      <action name="Validar" class="mesumo.actions.Usuario">
+		<result name="success">/bienvenida.jsp</result>
+		<result name="error">/error.jsp</result>
+      </action>
+
+	<action name="Registrarse" class="mesumo.actions.Registrarse" method="registrar">
+		<result name="success">/principal.jsp</result>
+		<result name="error">/error.jsp</result>
+	</action>
+
+	<action name="BusquedaNueva" class="mesumo.actions.Busquedas">
+		<result name="success" type="json">
+			<param name="root">
+				listaBusquedas
+			</param>
+		</result>
+	</action>
+	<action name="CargarLista" class="mesumo.actions.Busquedas" method="cargarLista">
+		<result name="success" type="json">
+			<param name="root">
+				listaBusquedas
+			</param>
+		</result>
+	</action>
+	
+	<action name="ListarPorCategoria" class="mesumo.actions.Busquedas" method="cargarListaPorCategoria">
+		<result name="success" type="json">
+			<param name="root">
+				listaBusquedas
+			</param>
+		</result>
+	</action>
+	
+	<action name="Eliminar" class="mesumo.actions.Busquedas" method="borrarAccion">
+		<result name="success" type="json">
+			<param name="root">
+				listaBusquedas
+			</param>
+		</result>
+	</action>
+	<action name="traerBusqueda" class="mesumo.actions.Busquedas" method="traerDetalle">
+		<result name="success">/detalle.jsp</result>
+		<result name="error">/error.jsp</result>
+	</action>
+
+	</package>
+
+</struts>
