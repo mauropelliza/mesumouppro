@@ -6,10 +6,14 @@
    <constant name="struts.ui.theme" value="simple" />
    <package name="MesumoPR" extends="struts-default,json-default">
     
-      <action name="Validar" class="mesumo.actions.Usuario">
-		<result name="success">/bienvenida.jsp</result>
+      <action name="Validar" class="mesumo.actions.Login">
+		<result name="success">/principal.jsp</result>
 		<result name="error">/error.jsp</result>
       </action>
+      
+      <action name="Salir" class="mesumo.actions.Login" method="logout">  
+		<result name="success" >/ingreso.jsp</result>  
+		</action>
 
 	<action name="Registrarse" class="mesumo.actions.Registrarse" method="registrar">
 		<result name="success">/principal.jsp</result>

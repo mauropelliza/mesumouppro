@@ -7,13 +7,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="USUARIOS")
+@SequenceGenerator(name="USUARIOS_SEQ", sequenceName="USUARIOS_SEQ")
 public class UsuarioE implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 872354371994575834L;
 	@Id
-    @GeneratedValue
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USUARIOS_SEQ")
     @Column(name="ID")
 	private Integer	id;
 	@Column(name="NOMBRE")

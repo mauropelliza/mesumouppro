@@ -29,9 +29,9 @@
 				<div class="form-group">
 					<s:form action="Validar">
 						<label>Nombre de usuario</label>
-						<s:textfield cssClass="form-control ms-forminput" name="userlogin" />
+						<s:textfield cssClass="form-control ms-forminput" name="username" />
 						<label>Contraseña</label>
-						<s:password cssClass="form-control ms-forminput" name="userpwd" />
+						<s:password cssClass="form-control ms-forminput" name="userpass" />
 						<s:submit cssClass="form-control btn btn-success" value="Entrar" />
 					</s:form>
 				</div>

@@ -18,11 +18,17 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<button id="creaBusq" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal">Cre&aacute; una nueva búsqueda</button>
-				<div class="ms-usercard">
-<%-- 					<span class="ms-username"><s:property value="usuario" /></span> --%>
-					<span class="ms-username">Mauro Pelliza</span>
-					<span class="fa fa-user-md ms-usericon"></span>
+				<div class="ms-usercard dropdown"> 
+					<div class="dropdown-toggle" data-toggle="dropdown">
+						<span class="ms-username"><s:property value="username" /></span>
+						<span class="fa fa-user-md ms-usericon"></span>
+					</div>
+					<ul class="dropdown-menu">
+			    		<li><a href="<s:url action="Salir" method="logout" />">Salir</a></li>
+			  		</ul>
 				</div>
+				
+				
 			</div>
 		</div>
 		<div class="row">
