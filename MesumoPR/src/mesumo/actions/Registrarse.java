@@ -1,6 +1,8 @@
 package mesumo.actions;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import com.opensymphony.xwork2.ActionSupport;
 import mesumo.entities.UsuarioE;
 import mesumo.util.HibernateUtil;
@@ -23,26 +25,26 @@ public class Registrarse extends ActionSupport{
 
 	public String registrar(){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-	    session.beginTransaction();
-	
-	    UsuarioE ue = new UsuarioE();
-	    
-	    ue.setNombre(getNombre());
-	    ue.setApellido(getApellido());
-	    ue.setUsuario(getUsuario());
-	    ue.setPassword(getPassword());
-	    ue.setHash(getHash());
-	    ue.setDni(getDni());
-	    ue.setHdireccion(getHdireccion());
-	    ue.setHemail(getHemail());
-	    ue.setHnombre(getHnombre());
-	    ue.setHtelefono(getHtelefono());
-	    
-	    session.save(ue);
-	
-	    session.getTransaction().commit();
-	    
-//	    HibernateUtil.getSessionFactory().close();
+		Transaction tr = session.getTransaction();	
+		try { 
+			if(!tr.isActive()) {   
+			    UsuarioE ue = new UsuarioE();
+			    ue.setNombre(getNombre());
+			    ue.setApellido(getApellido());
+			    ue.setUsuario(getUsuario());
+			    ue.setPassword(getPassword());
+			    ue.setHash(getHash());
+			    ue.setDni(getDni());
+			    ue.setHdireccion(getHdireccion());
+			    ue.setHemail(getHemail());
+			    ue.setHnombre(getHnombre());
+			    ue.setHtelefono(getHtelefono());
+			    session.save(ue);
+	            tr.commit();
+			}
+		}catch (Exception e) { 
+			tr.rollback();
+		}
 	    return SUCCESS;
 	}
 

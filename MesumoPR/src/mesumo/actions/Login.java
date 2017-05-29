@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -61,12 +62,21 @@ public class Login extends ActionSupport implements SessionAware{
 
 		UsuarioE us = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.getTransaction().begin();
-        String hql = "from mesumo.entities.UsuarioE u  where u.usuario = :nom and u.password = :pw";
-        us = (UsuarioE) session.createQuery(hql).setParameter("nom", username).setParameter("pw", userpass)
-        		.getSingleResult();
-        session.getTransaction().commit();
-          
+		Transaction tr = session.getTransaction();	
+		try { 
+			if(!tr.isActive()) {   
+		        tr.begin();
+		        String hql = "from mesumo.entities.UsuarioE u  where u.usuario = :nom and u.password = :pw";
+		        us = (UsuarioE) session.createQuery(hql).setParameter("nom", username).setParameter("pw", userpass)
+		        		.getSingleResult();
+		        tr.commit();
+		        sessionmap.put("usid",us.getId().toString());
+		        sessionmap.put("usalias",us.getUsuario());
+		        
+			}
+		}catch (Exception e) { 
+			tr.rollback();
+		}
 		return us;
 	} 
 

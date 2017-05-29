@@ -13,6 +13,7 @@
 	<input type="hidden" id="rutaLista" value="<s:url action="CargarLista" method="cargarLista" />" />
 	<input type="hidden" id="traerBusqueda" value="<s:url action="traerBusqueda" method="traerDetalle" />" />
 	<input type="hidden" id="eliminarBusqueda" value="<s:url action="Eliminar" method="borrarAccion" />" />
+	<input type="hidden" id="idusertag" value="<s:property value="#session.usid" />" />
 	<%@include file="header.jsp" %>
 	<div class="container-fluid ms-cuerpoPagina">
 		<div class="row">
@@ -20,7 +21,7 @@
 				<button id="creaBusq" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal">Cre&aacute; una nueva búsqueda</button>
 				<div class="ms-usercard dropdown"> 
 					<div class="dropdown-toggle" data-toggle="dropdown">
-						<span class="ms-username"><s:property value="username" /></span>
+						<span class="ms-username"><s:property value="#session.usalias" /></span>
 						<span class="fa fa-user-md ms-usericon"></span>
 					</div>
 					<ul class="dropdown-menu">
@@ -32,11 +33,13 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-xs-9">
 				<div id="lista">
 				
 				
 				</div>
+			</div>
+			<div class="col-xs-3">
 			</div>
 		</div>	
 	</div>	

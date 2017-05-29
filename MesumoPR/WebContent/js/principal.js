@@ -31,10 +31,11 @@ $(function() {
 
 function enviarNuevaBusqueda(){
 	var categoria = $('#catSelect option:selected').val();
-	
+	var idusertag = parseInt($("#idusertag").val());
 	$.ajax({
         type: 'POST',
-        url:'BusquedaNueva.action?busq.titulo='+ $('#tituloBusqueda').val()+'&busq.descripcion='+$('#descBusqueda').val()+'&busq.idcategoria='+categoria,
+        url:'BusquedaNueva.action?busq.titulo='+ $('#tituloBusqueda').val()+'&busq.descripcion='
+        +$('#descBusqueda').val()+'&busq.idcategoria='+categoria+'&busq.idusuario='+idusertag,
         dataType: 'json',
         success: actualizarLista
     });
