@@ -13,7 +13,8 @@
 	<div class="container-fluid">
 		<div class="jumbotron ms-cartel-entrada">
 			<h3 class="ms-roboto">¿Sos jubilado? ¿Querés ayudar con tu tiempo a personas que te necesitan?</h3>
-			<h2>Hacé click <a>acá</a> y conoce todas las oportunidades que hay para vos</h2>
+<%-- 			<h2>Hacé click <a id="aca" href="<s:url action="IngresoVisita" />">acá</a> y conoce todas las oportunidades que hay para vos</h2> --%>
+				<h2>Hacé click <a id="aca">acá</a> y conoce todas las oportunidades que hay para vos</h2>
 		</div>
 		<div class="row ms-col-container">
 			<div class="col-xs-8 ms-bd-rg">
@@ -39,5 +40,6 @@
 			</div>
 		</div>
 	</div>
+		
 </body>
 </html>

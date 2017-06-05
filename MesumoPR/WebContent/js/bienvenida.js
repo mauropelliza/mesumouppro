@@ -1,4 +1,4 @@
-$(function() {
+$(function() {debugger;
 	$.ajax({
         type: 'POST',
         url: $("#rutaLista").val(),

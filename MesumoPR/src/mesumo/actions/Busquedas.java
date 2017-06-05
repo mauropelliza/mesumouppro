@@ -12,6 +12,8 @@ import org.hibernate.Transaction;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+import mesumo.daos.InterfazDAOBusquedas;
+import mesumo.daos.OraDaoBusquedas;
 import mesumo.entities.BusquedaE;
 import mesumo.util.HibernateUtil;
 
@@ -20,79 +22,68 @@ public class Busquedas extends ActionSupport {
 	
 	BusquedaE busq;
 	List<BusquedaE> listaBusquedas;
-	Map acconsess = (Map) ActionContext.getContext().get("session");
-	Integer sessidusuario = Integer.parseInt( (String)acconsess.get("usid") );
+	Map acconsess = null;
+	Integer sessidusuario = null;
 	
+	public Busquedas () {
+		acconsess = (Map) ActionContext.getContext().get("session");
+		if (acconsess != null) {
+			String aux = (String)acconsess.get("usid");
+			if (aux != null) {
+			 sessidusuario = Integer.parseInt(aux);
+			}
+		}
+	}
+
+	@SuppressWarnings("unchecked")
 	public String execute() {
 		String estado = ERROR;
+		
+		
+		
 		busq.setFechapublicacion(new Timestamp(System.currentTimeMillis()));
-		saveElement(busq);
-		listaBusquedas = listarBusquedas(null);
-		estado = SUCCESS;
+		InterfazDAOBusquedas daob = new OraDaoBusquedas();
+		int result = daob.saveOne(busq);
+		listaBusquedas = daob.getMany(sessidusuario,null);
+		if (result == 0)	estado = SUCCESS;
 		return estado;	
 	}
 	
 	public String cargarLista() {
 		String estado = ERROR;
-		listaBusquedas = listarBusquedas(sessidusuario);
+		InterfazDAOBusquedas daob = new OraDaoBusquedas();
+		listaBusquedas = daob.getMany(sessidusuario,null);
 		estado = SUCCESS;
 		return estado;	
 	}
 	
 	public String cargarListaPorCategoria() {
-		listaBusquedas = listarPorCategorias();
+		int cat = busq.getIdcategoria();
+		InterfazDAOBusquedas daob = new OraDaoBusquedas();
+		listaBusquedas = daob.getMany(null, cat);
 		return SUCCESS;
 	}
 	
 	public String traerDetalle() {
 		String estado = ERROR;//hay que cambiarlo
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction tr = session.getTransaction();	
-		try { 
-			if(!tr.isActive()) {   
-		        tr.begin();
-		        busq = (BusquedaE) session.get(mesumo.entities.BusquedaE.class,busq.getId());
-		        tr.commit();
-				estado = SUCCESS;
-			}
-		}catch (Exception e) { 
-			tr.rollback();
-		}
+		InterfazDAOBusquedas daob = new OraDaoBusquedas();
+		busq = daob.getOne(busq);
+		estado = SUCCESS;
 		return estado;
 	}
 	
 	public String borrarAccion() {
 		String estado = ERROR;
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction tr = session.getTransaction();	
-		try { 
-			if(!tr.isActive()) {   
-				tr.begin();
-				session.delete(busq);
-				tr.commit();
-				estado = SUCCESS;
-				listaBusquedas = listarBusquedas(sessidusuario);
-			}
-		}catch (Exception e) { 
-			tr.rollback();
+		InterfazDAOBusquedas daob = new OraDaoBusquedas();
+		int result = daob.deleteOne(busq);
+//		listaBusquedas = listarBusquedas(sessidusuario);
+		listaBusquedas = daob.getMany(sessidusuario, null);
+		if(result == 0) {
+			estado = SUCCESS;
 		}
 		return estado;	
 	}
-	
-	private void saveElement(BusquedaE bs) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction tr = session.getTransaction();
-        try { 
-			if(!tr.isActive()) {   
-		        tr.begin();
-		        session.save(bs);
-		        tr.commit();
-			}
-		}catch (Exception e) { 
-			tr.rollback();
-		}
-    }
- 
+	 
     private List listarBusquedas(Integer idusuario) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tr = session.getTransaction();
@@ -144,5 +135,20 @@ public class Busquedas extends ActionSupport {
 		this.listaBusquedas = listaBusquedas;
 	}
  
+	public Map getAcconsess() {
+		return acconsess;
+	}
+
+	public void setAcconsess(Map acconsess) {
+		this.acconsess = acconsess;
+	}
+
+	public Integer getSessidusuario() {
+		return sessidusuario;
+	}
+
+	public void setSessidusuario(Integer sessidusuario) {
+		this.sessidusuario = sessidusuario;
+	}
 	
 }

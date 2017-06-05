@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="js/bienvenida.js"></script>	 
 </head>
 <body>
-	<input type="hidden" id="rutaLista" value="<s:url action="CargarLista" method="cargarLista" />" />
+	<input type="hidden" id="rutaLista" value="<s:url action="BienvenidaLista" method="cargarLista" />" />
 	<input type="hidden" id="traerBusqueda" value="<s:url action="traerBusqueda" method="traerDetalle" />" />
 	<input type="hidden" id="listarPorCategoria" value="<s:url action="ListarPorCategoria" method="cargarListaPorCategoria" />" />
 	<%@include file="header.jsp" %>

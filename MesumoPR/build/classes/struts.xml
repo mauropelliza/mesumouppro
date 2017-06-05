@@ -11,6 +11,11 @@
 		<result name="error">/error.jsp</result>
       </action>
       
+      <action name="IngresoVisita" class="mesumo.actions.Login">
+		<result name="success">/bienvenida.jsp</result>
+		<result name="error">/error.jsp</result>
+      </action>
+      
       <action name="Salir" class="mesumo.actions.Login" method="logout">  
 		<result name="success" >/ingreso.jsp</result>  
 		</action>
@@ -56,5 +61,16 @@
 	</action>
 
 	</package>
+	
+	<package name="common" namespace="/" extends="json-default">
+		<action name="BienvenidaLista" class="mesumo.actions.Busquedas" method="cargarLista">
+		<result name="success" type="json">
+			<param name="root">
+				listaBusquedas
+			</param>
+		</result>
+	</action>
+	</package>
+	
 
 </struts>

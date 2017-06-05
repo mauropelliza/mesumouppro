@@ -10,6 +10,8 @@ import org.hibernate.Transaction;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import mesumo.daos.InterfazDAOUsuarios;
+import mesumo.daos.OraDaoUsuarios;
 import mesumo.entities.BusquedaE;
 import mesumo.entities.UsuarioE;
 import mesumo.util.HibernateUtil;
@@ -41,43 +43,48 @@ public class Login extends ActionSupport implements SessionAware{
 		this.userpass = userpass;
 	}
 	
+	@SuppressWarnings("unused")
 	public String execute(){
-		UsuarioE user = validar(username, userpass);
-	    if(user != null){  
-	        return "success";  
-	    }  
-	    else{  
-	        return "error";  
-	    }  
+//		InterfazDAOUsuarios dao = new OraDaoUsuarios();
+//		UsuarioE user = dao.validar(username, userpass);
+//		sessionmap.put("usid",user.getId().toString());
+//        sessionmap.put("usalias",user.getUsuario());
+//	    
+//        if(user != null){  
+//	        return "success";  
+//	    }  
+//	    else{  
+//	        return "error";  
+//	    }
+        
+		InterfazDAOUsuarios dao = new OraDaoUsuarios();
+		if ((username != null && userpass != null)) {
+			UsuarioE user = dao.validar(username, userpass);
+			sessionmap.put("usid",user.getId().toString());
+	        sessionmap.put("usalias",user.getUsuario());
+		
+	        if(user != null){  
+		        return "success";  
+		    }  
+		    else{  
+		        return "error";  
+		    } 
+		} else {
+			sessionmap.put("usid","VISITA");
+	        sessionmap.put("usalias","VISITA");
+	        
+	        return SUCCESS;
+		}
 	}  
 	  
-
+	public String entradaSinSesion(){
+		return SUCCESS;
+	}
 	  
 	public String logout(){  
 	    sessionmap.invalidate();  
 	    return "success";  
 	}
 //https://www.javatpoint.com/struts-2-login-and-logout-example	
-	public UsuarioE validar(String username, String userpass){
-
-		UsuarioE us = null;
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction tr = session.getTransaction();	
-		try { 
-			if(!tr.isActive()) {   
-		        tr.begin();
-		        String hql = "from mesumo.entities.UsuarioE u  where u.usuario = :nom and u.password = :pw";
-		        us = (UsuarioE) session.createQuery(hql).setParameter("nom", username).setParameter("pw", userpass)
-		        		.getSingleResult();
-		        tr.commit();
-		        sessionmap.put("usid",us.getId().toString());
-		        sessionmap.put("usalias",us.getUsuario());
-		        
-			}
-		}catch (Exception e) { 
-			tr.rollback();
-		}
-		return us;
-	} 
 
 }

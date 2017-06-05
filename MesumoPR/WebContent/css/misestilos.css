@@ -177,3 +177,11 @@
   -webkit-transform: translate(0px,5px);
 	border-bottom: 1px solid;
 }
+
+#ms-panel-detalle{
+	margin-top:40px;
+}
+
+#ms-panel-detalle .panel-footer{
+	overflow:hidden;
+}
