@@ -1,14 +1,16 @@
-$(function() {debugger;
+$(function() {
+	var paginaEnReady =  parseInt($("#paginaActual").val());
+	
 	$.ajax({
         type: 'POST',
-        url: $("#rutaLista").val(),
+        url: $("#rutaLista").val() + "?page=" +paginaEnReady ,
         dataType: 'json',
         success: actualizarLista
     });
 	
 	$(".catButton").on("click", function(event){
 		idcategoria = $(this).data("cat");
-		var ir = $("#listarPorCategoria").val() + "?busq.idcategoria=" + idcategoria;
+		var ir = $("#listarPorCategoria").val() + "?busq.idcategoria=" + idcategoria + "&page=" + parseInt($("#paginaActual").val());
 		$.ajax({
 	        type: 'POST',
 	        url: ir,

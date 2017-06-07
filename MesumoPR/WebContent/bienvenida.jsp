@@ -11,6 +11,7 @@
 <body>
 	<input type="hidden" id="rutaLista" value="<s:url action="BienvenidaLista" method="cargarLista" />" />
 	<input type="hidden" id="traerBusqueda" value="<s:url action="traerBusqueda" method="traerDetalle" />" />
+	<input type="hidden" id="paginaActual" value="1" />
 	<input type="hidden" id="listarPorCategoria" value="<s:url action="ListarPorCategoria" method="cargarListaPorCategoria" />" />
 	<%@include file="header.jsp" %>
 	<div class="container-fluid" id="ms-bienvenidaContainer">
@@ -37,6 +38,9 @@
 					<div class="col-xs-12">
 						<div id="lista">
 				
+				
+						</div>
+						<div id="paginadorContainer">
 				
 						</div>
 					</div>

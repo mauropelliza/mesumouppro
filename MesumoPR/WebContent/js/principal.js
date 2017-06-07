@@ -17,7 +17,7 @@ $(function() {
 	
 	$(document).on("click",".borrarAccion",function(){
 		var id = $(this).closest(".ms-card").data("id");
-		var rutaBorrar = $("#eliminarBusqueda").val()+ '?busq.id=' + id;
+		var rutaBorrar = $("#eliminarBusqueda").val()+ '?busq.id=' + id + "&page=" + parseInt($("#paginaActual").val());
 		$.ajax({
 	        type: 'POST',
 	        url:rutaBorrar,
@@ -30,12 +30,13 @@ $(function() {
 });
 
 function enviarNuevaBusqueda(){
+	//cuando vuelva la lista se carga desde el principio
 	var categoria = $('#catSelect option:selected').val();
 	var idusertag = parseInt($("#idusertag").val());
 	$.ajax({
         type: 'POST',
         url:'BusquedaNueva.action?busq.titulo='+ $('#tituloBusqueda').val()+'&busq.descripcion='
-        +$('#descBusqueda').val()+'&busq.idcategoria='+categoria+'&busq.idusuario='+idusertag,
+        +$('#descBusqueda').val()+'&busq.idcategoria='+categoria+'&busq.idusuario='+idusertag + + "&page=1",
         dataType: 'json',
         success: actualizarLista
     });
@@ -46,7 +47,7 @@ function enviarNuevaBusqueda(){
 
 function actualizarLista(data){
 	var ruta = $("#traerBusqueda").val();
-	
+	// hay que manejar el borrado con un onclick para meterle el numero de pagina
 	var html = "";
 	$(data).each(function( index, elem ) {
 		var l1 = '<div class="ms-card" data-id="'+ elem.id +'">';

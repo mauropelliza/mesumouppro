@@ -14,6 +14,7 @@
 	<input type="hidden" id="traerBusqueda" value="<s:url action="traerBusqueda" method="traerDetalle" />" />
 	<input type="hidden" id="eliminarBusqueda" value="<s:url action="Eliminar" method="borrarAccion" />" />
 	<input type="hidden" id="idusertag" value="<s:property value="#session.usid" />" />
+	<input type="hidden" id="paginaActual" value="1" />
 	<%@include file="header.jsp" %>
 	<div class="container-fluid ms-cuerpoPagina">
 		<div class="row">
@@ -36,6 +37,9 @@
 			<div class="col-xs-9">
 				<div id="lista">
 				
+				
+				</div>
+				<div id="paginadorContainer">
 				
 				</div>
 			</div>

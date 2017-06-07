@@ -16,7 +16,8 @@ public class Busquedas extends ActionSupport {
 	List<BusquedaE> listaBusquedas;
 	Map acconsess = null;
 	Integer sessidusuario = null;
-	Integer start;
+	Integer page;
+	Integer ultimaPagina;
 	
 	public Busquedas () {
 		acconsess = (Map) ActionContext.getContext().get("session");
@@ -35,7 +36,8 @@ public class Busquedas extends ActionSupport {
 		InterfazDAOBusquedas daob = new OraDaoBusquedas();
 		int result = daob.saveOne(busq);
 		Integer count = daob.getCount();
-		listaBusquedas = daob.getMany(sessidusuario,null,start,count);
+		ultimaPagina = (int) (Math.ceil((count/page)));
+		listaBusquedas = daob.getMany(sessidusuario,null,page,count);
 		if (result == 0)	estado = SUCCESS;
 		return estado;	
 	}
@@ -44,7 +46,7 @@ public class Busquedas extends ActionSupport {
 		String estado = ERROR;
 		InterfazDAOBusquedas daob = new OraDaoBusquedas();
 		Integer count = daob.getCount();
-		listaBusquedas = daob.getMany(sessidusuario,null,start,count);
+		listaBusquedas = daob.getMany(sessidusuario,null,page,count);
 		estado = SUCCESS;
 		return estado;	
 	}
@@ -53,7 +55,7 @@ public class Busquedas extends ActionSupport {
 		int cat = busq.getIdcategoria();
 		InterfazDAOBusquedas daob = new OraDaoBusquedas();
 		Integer count = daob.getCount();
-		listaBusquedas = daob.getMany(null, cat,start,count);
+		listaBusquedas = daob.getMany(null, cat,page,count);
 		return SUCCESS;
 	}
 	
@@ -71,7 +73,7 @@ public class Busquedas extends ActionSupport {
 		int result = daob.deleteOne(busq);
 //		listaBusquedas = listarBusquedas(sessidusuario);
 		Integer count = daob.getCount();
-		listaBusquedas = daob.getMany(sessidusuario, null,start,count);
+		listaBusquedas = daob.getMany(sessidusuario, null,page,count);
 		if(result == 0) {
 			estado = SUCCESS;
 		}
@@ -110,12 +112,20 @@ public class Busquedas extends ActionSupport {
 		this.sessidusuario = sessidusuario;
 	}
 
-	public Integer getStart() {
-		return start;
+	public Integer getPage() {
+		return page;
 	}
 
-	public void setStart(Integer start) {
-		this.start = start;
+	public void setPage(Integer page) {
+		this.page = page;
+	}
+
+	public Integer getUltimaPagina() {
+		return ultimaPagina;
+	}
+
+	public void setUltimaPagina(Integer ultimaPagina) {
+		this.ultimaPagina = ultimaPagina;
 	}
 	
 }
