@@ -1,21 +1,13 @@
 package mesumo.actions;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-
 import mesumo.daos.InterfazDAOBusquedas;
 import mesumo.daos.OraDaoBusquedas;
 import mesumo.entities.BusquedaE;
-import mesumo.util.HibernateUtil;
 
 @SuppressWarnings("serial")
 public class Busquedas extends ActionSupport {
@@ -24,6 +16,7 @@ public class Busquedas extends ActionSupport {
 	List<BusquedaE> listaBusquedas;
 	Map acconsess = null;
 	Integer sessidusuario = null;
+	Integer start;
 	
 	public Busquedas () {
 		acconsess = (Map) ActionContext.getContext().get("session");
@@ -37,14 +30,12 @@ public class Busquedas extends ActionSupport {
 
 	@SuppressWarnings("unchecked")
 	public String execute() {
-		String estado = ERROR;
-		
-		
-		
+		String estado = ERROR;		
 		busq.setFechapublicacion(new Timestamp(System.currentTimeMillis()));
 		InterfazDAOBusquedas daob = new OraDaoBusquedas();
 		int result = daob.saveOne(busq);
-		listaBusquedas = daob.getMany(sessidusuario,null);
+		Integer count = daob.getCount();
+		listaBusquedas = daob.getMany(sessidusuario,null,start,count);
 		if (result == 0)	estado = SUCCESS;
 		return estado;	
 	}
@@ -52,7 +43,8 @@ public class Busquedas extends ActionSupport {
 	public String cargarLista() {
 		String estado = ERROR;
 		InterfazDAOBusquedas daob = new OraDaoBusquedas();
-		listaBusquedas = daob.getMany(sessidusuario,null);
+		Integer count = daob.getCount();
+		listaBusquedas = daob.getMany(sessidusuario,null,start,count);
 		estado = SUCCESS;
 		return estado;	
 	}
@@ -60,7 +52,8 @@ public class Busquedas extends ActionSupport {
 	public String cargarListaPorCategoria() {
 		int cat = busq.getIdcategoria();
 		InterfazDAOBusquedas daob = new OraDaoBusquedas();
-		listaBusquedas = daob.getMany(null, cat);
+		Integer count = daob.getCount();
+		listaBusquedas = daob.getMany(null, cat,start,count);
 		return SUCCESS;
 	}
 	
@@ -77,47 +70,13 @@ public class Busquedas extends ActionSupport {
 		InterfazDAOBusquedas daob = new OraDaoBusquedas();
 		int result = daob.deleteOne(busq);
 //		listaBusquedas = listarBusquedas(sessidusuario);
-		listaBusquedas = daob.getMany(sessidusuario, null);
+		Integer count = daob.getCount();
+		listaBusquedas = daob.getMany(sessidusuario, null,start,count);
 		if(result == 0) {
 			estado = SUCCESS;
 		}
 		return estado;	
 	}
-	 
-    private List listarBusquedas(Integer idusuario) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction tr = session.getTransaction();
-        List result = null;
-        try { 
-			if(!tr.isActive()) {   
-		        session.beginTransaction();
-		        result = session.createQuery("from mesumo.entities.BusquedaE b where b.idusuario = :idusuario order by b.fechapublicacion")
-		        		.setParameter("idusuario", idusuario).list();
-		        tr.commit();
-			}
-		}catch (Exception e) { 
-			tr.rollback();
-		}
-        return result;
-    }
-    
-    private List listarPorCategorias() {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        List result = null;
-        Transaction tr = session.getTransaction();
-        try { 
-			if(!tr.isActive()) {
-		        String hql = "from mesumo.entities.BusquedaE b  where b.idcategoria = :idcat order by b.fechapublicacion";
-		        result = session.createQuery(hql)
-		        .setParameter("idcat", busq.getIdcategoria())
-		        .list();
-		        tr.commit();
-			}
-		}catch (Exception e) { 
-			tr.rollback();
-		}
-        return result;
-    }
 
 	public BusquedaE getBusq() {
 		return busq;
@@ -149,6 +108,14 @@ public class Busquedas extends ActionSupport {
 
 	public void setSessidusuario(Integer sessidusuario) {
 		this.sessidusuario = sessidusuario;
+	}
+
+	public Integer getStart() {
+		return start;
+	}
+
+	public void setStart(Integer start) {
+		this.start = start;
 	}
 	
 }

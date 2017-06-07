@@ -31,8 +31,9 @@ public class OraDaoBusquedas implements InterfazDAOBusquedas {
 
 	@SuppressWarnings({ "rawtypes"})
 	@Override
-	public List getMany(Integer userid,Integer categoria) {
+	public List getMany(Integer userid,Integer categoria, Integer start, Integer count) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer end;
         Transaction tr = session.getTransaction();
         List result = null;
         String hql = null;
@@ -63,6 +64,27 @@ public class OraDaoBusquedas implements InterfazDAOBusquedas {
 			return null;
 		}
         return result;
+	}
+	
+	@Override
+	public Integer getCount() {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tr = session.getTransaction();
+		Integer countResults = 0;
+		try { 
+			if(!tr.isActive()) {   
+				tr.begin();
+				
+				String countQ = "Select count (b.id) from mesumo.entities.BusquedaE b";
+				Query countQuery = session.createQuery(countQ);
+				Long countResultsl = (Long) countQuery.uniqueResult();
+				
+				tr.commit();
+			}
+		}catch (Exception e) { 
+			tr.rollback();
+		}
+		return countResults;
 	}
 
 	@Override
