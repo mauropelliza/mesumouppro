@@ -37,11 +37,11 @@ public class OraDaoBusquedas implements InterfazDAOBusquedas {
         Transaction tr = session.getTransaction();
         List result = null;
         String hql = null;
-        Integer from = ((page * 5) - 4);
+        Integer from = (5 * (page - 1));
         Integer maxResults = 5;
         if ((page * 5) > count){
         	//si el count es menor que la ultima posicion que yo quiero traer cambiio maxResults
-        	maxResults = count - (5 * (page - 1));
+        	maxResults = (count - from);
         }
        
         

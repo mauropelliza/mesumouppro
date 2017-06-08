@@ -36,7 +36,7 @@ public class Busquedas extends ActionSupport {
 		InterfazDAOBusquedas daob = new OraDaoBusquedas();
 		int result = daob.saveOne(busq);
 		Integer count = daob.getCount();
-		ultimaPagina = (int) (Math.ceil((count/page)));
+		ultimaPagina = (int) (Math.ceil((count/5)));
 		listaBusquedas = daob.getMany(sessidusuario,null,page,count);
 		if (result == 0)	estado = SUCCESS;
 		return estado;	
@@ -55,6 +55,7 @@ public class Busquedas extends ActionSupport {
 		int cat = busq.getIdcategoria();
 		InterfazDAOBusquedas daob = new OraDaoBusquedas();
 		Integer count = daob.getCount();
+		ultimaPagina = (int) (Math.ceil((count/5)));
 		listaBusquedas = daob.getMany(null, cat,page,count);
 		return SUCCESS;
 	}

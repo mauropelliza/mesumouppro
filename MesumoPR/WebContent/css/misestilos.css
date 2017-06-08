@@ -178,6 +178,34 @@
 	border-bottom: 1px solid;
 }
 
+.pg-center {
+    text-align: center;
+}
+
+.pg-pagination {
+    display: inline-block;
+}
+
+pg-pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+}
+
+.pg-pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+.pg-pagination a:hover:not(.active) {
+	background-color: #ddd;
+}
+
 #ms-panel-detalle{
 	margin-top:40px;
 }

@@ -34,17 +34,13 @@
 	</action>
 	<action name="CargarLista" class="mesumo.actions.Busquedas" method="cargarLista">
 		<result name="success" type="json">
-			<param name="root">
-				listaBusquedas
-			</param>
+		
 		</result>
 	</action>
 	
 	<action name="ListarPorCategoria" class="mesumo.actions.Busquedas" method="cargarListaPorCategoria">
 		<result name="success" type="json">
-			<param name="root">
-				listaBusquedas
-			</param>
+		
 		</result>
 	</action>
 	

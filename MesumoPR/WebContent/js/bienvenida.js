@@ -3,7 +3,7 @@ $(function() {
 	
 	$.ajax({
         type: 'POST',
-        url: $("#rutaLista").val() + "?page=" +paginaEnReady ,
+        url: $("#rutaLista").val() + "?page=" + paginaEnReady ,
         dataType: 'json',
         success: actualizarLista
     });
@@ -27,10 +27,11 @@ $(function() {
 });
 
 function actualizarLista(data){
+	
 	var ruta = $("#traerBusqueda").val();
 	
 	var html = "";
-	$(data).each(function( index, elem ) {
+	$(data.listaBusquedas).each(function( index, elem ) {
 		var l1 = '<div class="ms-card" data-id="'+ elem.id +'">';
 		var l2 = '<div class="row">';
 		var l3 = '<div class="col-xs-10">';
@@ -46,4 +47,18 @@ function actualizarLista(data){
 	});
 	
 	$("#lista").html(html);
+	debugger;
+	actualizarPaginador(data.ultimaPagina);
+}
+
+function actualizarPaginador(maxpag){
+	    var pag = $("#paginadorContainer .pg-pagination");
+	    var html = "";
+	    var i = 0;
+	    while ( i < parseInt(maxpag)){
+	        html += '<a href="#">'+ (i+1) +'</a>';
+	        i++;
+	   // <a href="#" class="active">2</a>
+	    }
+	    pag.html(html);
 }
