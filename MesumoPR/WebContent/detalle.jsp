@@ -34,6 +34,7 @@
 						
 				</div>
 				<div class="col-xs-4"></div>
+				<input id="requesterId" type="hidden" value="<s:property value="requester" />" />
 			</div>
 		</div>
 	</body>

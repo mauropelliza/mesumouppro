@@ -40,7 +40,11 @@
 				
 				</div>
 				<div id="paginadorContainer">
-				
+					<div class="pg-center">
+						<div class="pg-pagination">
+						
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="col-xs-3">

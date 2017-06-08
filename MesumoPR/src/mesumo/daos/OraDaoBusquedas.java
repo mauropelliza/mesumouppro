@@ -76,16 +76,22 @@ public class OraDaoBusquedas implements InterfazDAOBusquedas {
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public Integer getCount() {
+	public Integer getCount(Integer categoria) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tr = session.getTransaction();
 		Integer countResults = 0;
 		try { 
 			if(!tr.isActive()) {   
 				tr.begin();
+				Query countQuery = null;
+				if (categoria == null){
+					String countQ = "Select count (b.id) from mesumo.entities.BusquedaE b";
+					countQuery = session.createQuery(countQ);
+				} else {
+					String countQ = "Select count (b.id) from mesumo.entities.BusquedaE b where b.idcategoria = :idcat";
+					countQuery = session.createQuery(countQ).setParameter("idcat", categoria);
+				}
 				
-				String countQ = "Select count (b.id) from mesumo.entities.BusquedaE b";
-				Query countQuery = session.createQuery(countQ);
 				countResults = ((Long)countQuery.uniqueResult()).intValue();
 				
 				tr.commit();

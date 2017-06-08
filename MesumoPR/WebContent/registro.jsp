@@ -55,7 +55,7 @@
 								<s:textfield cssClass="form-control ms-forminput" name="htelefono" />
 								<label>Correo electr&oacute;nico</label>
 								<s:textfield cssClass="form-control ms-forminput" name="hemail" />
-								<s:submit cssClass="form-control btn btn-success" value="Confirmar" />
+								<s:submit cssClass="form-control btn btn-success" id="mandarUsuario" value="Confirmar" />
 							</div>
 						</div>	
 					</div>

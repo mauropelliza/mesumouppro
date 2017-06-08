@@ -27,14 +27,12 @@
 
 	<action name="BusquedaNueva" class="mesumo.actions.Busquedas">
 		<result name="success" type="json">
-			<param name="root">
-				listaBusquedas
-			</param>
+
 		</result>
 	</action>
 	<action name="CargarLista" class="mesumo.actions.Busquedas" method="cargarLista">
 		<result name="success" type="json">
-		
+
 		</result>
 	</action>
 	
@@ -46,9 +44,7 @@
 	
 	<action name="Eliminar" class="mesumo.actions.Busquedas" method="borrarAccion">
 		<result name="success" type="json">
-			<param name="root">
-				listaBusquedas
-			</param>
+			
 		</result>
 	</action>
 	<action name="traerBusqueda" class="mesumo.actions.Busquedas" method="traerDetalle">
@@ -61,9 +57,7 @@
 	<package name="common" namespace="/" extends="json-default">
 		<action name="BienvenidaLista" class="mesumo.actions.Busquedas" method="cargarLista">
 		<result name="success" type="json">
-			<param name="root">
-				listaBusquedas
-			</param>
+
 		</result>
 	</action>
 	</package>

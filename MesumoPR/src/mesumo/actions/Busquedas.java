@@ -18,6 +18,7 @@ public class Busquedas extends ActionSupport {
 	Integer sessidusuario = null;
 	Integer page;
 	Integer ultimaPagina;
+	Integer requester;
 	
 	public Busquedas () {
 		acconsess = (Map) ActionContext.getContext().get("session");
@@ -35,31 +36,31 @@ public class Busquedas extends ActionSupport {
 		busq.setFechapublicacion(new Timestamp(System.currentTimeMillis()));
 		InterfazDAOBusquedas daob = new OraDaoBusquedas();
 		int result = daob.saveOne(busq);
-		Integer count = daob.getCount();
-		ultimaPagina = (int) (Math.ceil((count/5)));
+		Integer count = daob.getCount(busq.getIdcategoria());
+		ultimaPagina =calcularUltimaPagina(count);
 		listaBusquedas = daob.getMany(sessidusuario,null,page,count);
 		if (result == 0)	estado = SUCCESS;
 		return estado;	
 	}
 	
 	public String cargarLista() {
-		String estado = ERROR;
 		InterfazDAOBusquedas daob = new OraDaoBusquedas();
-		Integer count = daob.getCount();
+		Integer count = daob.getCount(null);
+		ultimaPagina =calcularUltimaPagina(count);
 		listaBusquedas = daob.getMany(sessidusuario,null,page,count);
-		estado = SUCCESS;
-		return estado;	
+		return SUCCESS;	
 	}
 	
 	public String cargarListaPorCategoria() {
-		int cat = busq.getIdcategoria();
 		InterfazDAOBusquedas daob = new OraDaoBusquedas();
-		Integer count = daob.getCount();
-		ultimaPagina = (int) (Math.ceil((count/5)));
-		listaBusquedas = daob.getMany(null, cat,page,count);
+		Integer count = daob.getCount(busq.getIdcategoria());
+		ultimaPagina =calcularUltimaPagina(count);
+		listaBusquedas = daob.getMany(null, busq.getIdcategoria(),page,count);
 		return SUCCESS;
 	}
 	
+	
+
 	public String traerDetalle() {
 		String estado = ERROR;//hay que cambiarlo
 		InterfazDAOBusquedas daob = new OraDaoBusquedas();
@@ -72,15 +73,26 @@ public class Busquedas extends ActionSupport {
 		String estado = ERROR;
 		InterfazDAOBusquedas daob = new OraDaoBusquedas();
 		int result = daob.deleteOne(busq);
-//		listaBusquedas = listarBusquedas(sessidusuario);
-		Integer count = daob.getCount();
+		Integer count = daob.getCount(busq.getIdcategoria());
+		ultimaPagina =calcularUltimaPagina(count);
 		listaBusquedas = daob.getMany(sessidusuario, null,page,count);
 		if(result == 0) {
 			estado = SUCCESS;
 		}
 		return estado;	
 	}
+	
+	private Integer calcularUltimaPagina(Integer count) {
+		Float f = new Float(count);
+		f = (float) (f/5.00);
+		Integer ent = f.intValue();
+		if (f > ent) {
+			ent++;
+		}
 
+		return ent;
+	}
+	
 	public BusquedaE getBusq() {
 		return busq;
 	}
@@ -127,6 +139,14 @@ public class Busquedas extends ActionSupport {
 
 	public void setUltimaPagina(Integer ultimaPagina) {
 		this.ultimaPagina = ultimaPagina;
+	}
+
+	public Integer getRequester() {
+		return requester;
+	}
+
+	public void setRequester(Integer requester) {
+		this.requester = requester;
 	}
 	
 }

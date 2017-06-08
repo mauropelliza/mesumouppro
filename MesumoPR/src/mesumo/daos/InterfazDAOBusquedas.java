@@ -8,6 +8,6 @@ public interface InterfazDAOBusquedas {
 	public List getMany(Integer userid, Integer categoria, Integer start, Integer count);
 	public int deleteOne(BusquedaE busqueda);
 	public BusquedaE getOne(BusquedaE busqueda);
-	public Integer getCount();
+	public Integer getCount(Integer categoria);
 	
 }
