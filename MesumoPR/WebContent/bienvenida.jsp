@@ -15,27 +15,31 @@
 	<input type="hidden" id="listarPorCategoria" value="<s:url action="ListarPorCategoria" method="cargarListaPorCategoria" />" />
 	<%@include file="header.jsp" %>
 	<div class="container-fluid" id="ms-bienvenidaContainer">
+		<div class="row ms-col-container">
+			<div class="col-xs-1"></div>
+			<div class="col-xs-11">
+				<a class="ms-action-button catButton shadow ms-animate purple">Todos</a>
+				<a data-cat="1" class="ms-action-button catButton shadow ms-animate blue">Cooperadora</a>
+			  	<a data-cat="2" class="ms-action-button catButton shadow ms-animate red">Mantenimiento</a>
+			  	<a data-cat="3" class="ms-action-button catButton shadow ms-animate green">Informaciones</a>
+			  	<a data-cat="4" class="ms-action-button catButton shadow ms-animate orange">Pacientes</a>
+		  	</div>
+		</div>
 		<div class="row">
 			<div class="col-xs-1">
 			</div>
-			<div class="col-xs-3">
+			<div class="col-xs-3" id="ms-side-column">
 				<div class="row">
-					<h1>Encontrar oportunidades es muy f&aacute;cil</h1>
-					<h4>Cliqueá un botón para elegir una categoría en especial</h4>
+					<div class="col-xs-11">
+						<h1>Encontrar oportunidades es muy f&aacute;cil</h1>
+						<h4>Cliqueá un botón para elegir una categoría en especial</h4>
+					</div>	
 				</div>
 			</div>
 			<div class="col-xs-8">
-				
-				<div class="row ms-col-container">
-					<div class="col-xs-12">
-						<a data-cat="1" class="ms-action-button catButton shadow ms-animate blue">Cooperadora</a>
-					  	<a data-cat="2" class="ms-action-button catButton shadow ms-animate red">Mantenimiento</a>
-					  	<a data-cat="3" class="ms-action-button catButton shadow ms-animate green">Informaciones</a>
-					  	<a data-cat="4" class="ms-action-button catButton shadow ms-animate orange">Pacientes</a>
-				  	</div>
-				</div>
 				<div class="row">
-					<div class="col-xs-12">
+					<div class="col-xs-1"></div>
+					<div class="col-xs-11">
 						<div id="lista">
 				
 				

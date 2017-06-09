@@ -16,7 +16,7 @@
 			<h1 class="col-xs-offset-1">Cre&aacute; tu cuenta ahora, es muy sencilo</h1>
 		</div>
 		<div class="row">
-			<s:form action="Registrarse">
+			<s:form action="Registrarse" id="formRegistrarse">
 				<div class="col-xs-1">
 	
 				</div>
@@ -28,9 +28,9 @@
 								<label>Nombre de usuario</label>
 								<s:textfield cssClass="form-control ms-forminput" name="usuario" />
 								<label>Contraseña</label>
-								<s:password cssClass="form-control ms-forminput" name="password" />
+								<s:password cssClass="form-control ms-forminput" id="registrarse_password" name="password" />
 								<label>Repet&iacute; la contraseña</label>
-								<s:password cssClass="form-control ms-forminput" />
+								<s:password cssClass="form-control ms-forminput" id="repetir_password" />
 							</div>
 						</div>
 						<div class="col-xs-4 ms-ingreso">

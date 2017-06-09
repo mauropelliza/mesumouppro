@@ -6,11 +6,20 @@ $(function() {
 	$("#aca").click(function(){
 		window.location.href = "bienvenida.jsp";
 	});
-	$("#mandarUsuario").submit(function(event){//revisarrrrrrr
-		if($("#Registrarse_password").val() != $("#Registrarse_").val()) {
-			$("#Registrarse_password").addClass("ms-error");
-			$("#Registrarse_").addClass("ms-error");
-			event.preventDefault()
+	$("#formRegistrarse").submit(function(event){
+		event.preventDefault();
+		if(
+			($("#registrarse_password").val() != $("#repetir_password").val())
+			|| ( ($("#registrarse_password").val() == "") && ($("#repetir_password").val() == ""))
+			){
+			$("#registrarse_password").addClass("ms-error");
+			$("#repetir_password").addClass("ms-error");
+			return false;
 		}
-	});     
+	});
+	
+	$("#registrarse_password,#repetir_password").on("focus", function (){
+		$("#registrarse_password").removeClass("ms-error");
+		$("#repetir_password").removeClass("ms-error");
+	});
 });

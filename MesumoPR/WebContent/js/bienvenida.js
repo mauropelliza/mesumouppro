@@ -6,6 +6,7 @@ $(function() {
 	
 	
 	$(".catButton").on("click", function(event){
+		debugger;
 		categoriaElegida = $(this).data("cat");
 		traerDatos( $("#listarPorCategoria").val() , categoriaElegida,1);
 		//cuando se cambia la categoria se empieza por la primera pagina
