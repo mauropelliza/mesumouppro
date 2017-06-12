@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import mesumo.actions.Usuario;
 import mesumo.entities.UsuarioE;
 import mesumo.util.HibernateUtil;
 
@@ -39,9 +37,20 @@ public class OraDaoUsuarios implements InterfazDAOUsuarios {
 	}
 
 	@Override
-	public Usuario getOne(UsuarioE user) {
-		// TODO Auto-generated method stub
-		return null;
+	public UsuarioE getOne(UsuarioE user) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction tr = session.getTransaction();
+		UsuarioE ue = null;
+		try { 
+			if(!tr.isActive()) {   
+		        tr.begin();
+		        ue = (UsuarioE) session.get(mesumo.entities.UsuarioE.class,user.getId());
+		        tr.commit();
+			}
+		}catch (Exception e) { 
+			tr.rollback();
+		}
+		return ue;
 	}
 	
 	public UsuarioE validar(String username, String userpass){

@@ -32,7 +32,7 @@
 				<div class="row">
 					<div class="col-xs-11">
 						<h1>Encontrar oportunidades es muy f&aacute;cil</h1>
-						<h4>Cliqueá un botón para elegir una categoría en especial</h4>
+						<h4>Clique&aacute; un botón para elegir una categoría en especial</h4>
 					</div>	
 				</div>
 			</div>

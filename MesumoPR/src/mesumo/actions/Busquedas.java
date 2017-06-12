@@ -6,13 +6,17 @@ import java.util.Map;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import mesumo.daos.InterfazDAOBusquedas;
+import mesumo.daos.InterfazDAOUsuarios;
 import mesumo.daos.OraDaoBusquedas;
+import mesumo.daos.OraDaoUsuarios;
 import mesumo.entities.BusquedaE;
+import mesumo.entities.UsuarioE;
 
 @SuppressWarnings("serial")
 public class Busquedas extends ActionSupport {
 	
 	BusquedaE busq;
+	UsuarioE usuario;
 	List<BusquedaE> listaBusquedas;
 	Map acconsess = null;
 	Integer sessidusuario = null;
@@ -59,12 +63,14 @@ public class Busquedas extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	
-
 	public String traerDetalle() {
 		String estado = ERROR;//hay que cambiarlo
 		InterfazDAOBusquedas daob = new OraDaoBusquedas();
 		busq = daob.getOne(busq);
+		InterfazDAOUsuarios daou = new OraDaoUsuarios();
+		UsuarioE usaux = new UsuarioE();
+		usaux.setId(busq.getIdusuario());
+		usuario = daou.getOne(usaux);
 		estado = SUCCESS;
 		return estado;
 	}
@@ -147,6 +153,14 @@ public class Busquedas extends ActionSupport {
 
 	public void setRequester(Integer requester) {
 		this.requester = requester;
+	}
+
+	public UsuarioE getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioE usuario) {
+		this.usuario = usuario;
 	}
 	
 }

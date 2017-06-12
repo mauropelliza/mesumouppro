@@ -73,7 +73,7 @@ function actualizarLista(data){
 		var l2 = '<div class="row">';
 		var l3 = '<div class="col-xs-10">';
 		var l4 = '<h4>' + elem.titulo +'</h4>';
-		var l5 = '<p>' + elem.descripcion +'</p>';traerBusqueda
+		var l5 = '<p>' + elem.fechapublicacionForm +'</p>';
 		var l6 = '</div>';
 		var l7 = '<div class="col-xs-2 ms-card-options">';
 		var l8 = '<a class="fa fa-lg fa-sign-in" href="'+ ruta + '?busq.id=' + elem.id+'&requester='+ 1 +'"></a>';

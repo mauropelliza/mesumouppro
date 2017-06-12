@@ -3,6 +3,9 @@ package mesumo.entities;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,7 +39,16 @@ public class BusquedaE implements Serializable {
 	public BusquedaE() {
 		
 	}
-
+	
+	private String getFechaFormat(Timestamp date, String pattern) {
+		long l = date.getTime();
+		Date d = new Date(l);
+		Locale espan = new Locale("es","ES");
+		SimpleDateFormat format = new SimpleDateFormat(pattern,espan);
+		
+		return format.format(d);
+	}
+	
 	public Integer getIdcategoria() {
 		return idcategoria;
 	}
@@ -69,6 +81,14 @@ public class BusquedaE implements Serializable {
 	}
 	public Timestamp getFechapublicacion() {
 		return fechapublicacion;
+	}
+	public String getFechapublicacionForm() {
+		if (fechapublicacion == null)
+			return "";
+		else{
+			Timestamp tms = new Timestamp(getFechapublicacion().getTime());
+			return getFechaFormat(tms, "dd 'de' MMMM 'de' yyyy");
+		}
 	}
 	public void setFechapublicacion(Timestamp fechapublicacion) {
 		this.fechapublicacion = fechapublicacion;
